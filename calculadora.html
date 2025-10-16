@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo: Calculadora - Tkinter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/menu.js"></script>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+  <!-- Encabezado y Navegación -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0">
+        <h1 class="text-2xl font-bold text-gray-800">Guía de Tkinter</h1>
+      </div>
+      <nav class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-4">
+          <a href="index.html" class="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+          <a href="widgets.html" class="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Widgets</a>
+          <a href="layout.html" class="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Gestores de Geometría</a>
+          <a href="dialogos.html" class="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Diálogos</a>
+          <a href="calculadora.html" class="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calculadora</a>
+        </div>
+      </nav>
+
+      <!-- Botón Menú Móvil -->
+      <div class="md:hidden">
+        <div class="relative group" tabindex="0">
+          <button id="menuBtn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Menú móvil -->
+    <div id="mobileMenu" class="hidden md:hidden mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+      <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu">
+        <a href="index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inicio</a>
+        <a href="widgets.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Widgets</a>
+        <a href="layout.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gestores de Geometría</a>
+        <a href="dialogos.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Diálogos</a>
+        <a href="calculadora.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Calculadora</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+<h2 class="text-3xl font-bold text-gray-900 mb-4 border-b pb-2">Ejemplo Práctico: Calculadora</h2>
+<article class="bg-white p-6 rounded-lg shadow-lg mb-6">
+  <p class="mb-4">Este ejemplo combina varios widgets (<code>Entry</code>, <code>Button</code>) y el gestor <code>grid()</code> para crear la interfaz de una calculadora.</p>
+  <div class="grid md:grid-cols-2 gap-8 items-start">
+    <div>
+      <h4 class="text-xl font-semibold text-gray-800 mb-2">Código Completo</h4>
+      <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto h-96"><code class="language-python">
+from tkinter import *
+
+root = Tk()
+root.title("Calculadora")
+root.resizable(0,0)
+
+# Pantalla de entrada
+pantalla = Entry(root, width=22, bg="black", fg="white", borderwidth=0, font=('arial', 18, 'bold'))
+pantalla.grid(row=0, column=0, columnspan=4, padx=5, pady=5)
+
+# Funciones
+def click_boton(valor):
+    pantalla.insert(END, valor)
+
+def borrar():
+    pantalla.delete(0, END)
+
+def calcular():
+    try:
+        expresion = pantalla.get()
+        resultado = eval(expresion)
+        pantalla.delete(0, END)
+        pantalla.insert(0, resultado)
+    except:
+        pantalla.delete(0, END)
+        pantalla.insert(0, "Error")
+
+# Definición de botones
+botones = [
+    '7', '8', '9', '/',
+    '4', '5', '6', '*',
+    '1', '2', '3', '-',
+    '0', '.', '=', '+'
+]
+
+fila = 1
+col = 0
+for boton_texto in botones:
+    if boton_texto == "=":
+        Button(root, text=boton_texto, width=9, height=3, command=calcular).grid(row=fila, column=col, padx=1, pady=1)
+    else:
+        Button(root, text=boton_texto, width=9, height=3, command=lambda val=boton_texto: click_boton(val)).grid(row=fila, column=col, padx=1, pady=1)
+    
+    col += 1
+    if col > 3:
+        col = 0
+        fila += 1
+
+Button(root, text="Borrar", width=40, height=3, command=borrar).grid(row=5, column=0, columnspan=4, padx=1, pady=1)
+
+root.mainloop()
+      </code></pre>
+    </div>
+    <div>
+      <h4 class="text-xl font-semibold text-gray-800 mb-2">Resultado Visual (simulación)</h4>
+      <p class="mb-4 text-sm text-gray-600">Apariencia aproximada de la calculadora.</p>
+      <div class="bg-gray-200 p-4 rounded-lg shadow-inner w-full max-w-xs mx-auto">
+        <div class="bg-black text-white text-right text-3xl p-4 rounded mb-2">0</div>
+        <div class="grid grid-cols-4 gap-2">
+          <button class="bg-gray-300 p-4 rounded text-xl">7</button>
+          <button class="bg-gray-300 p-4 rounded text-xl">8</button>
+          <button class="bg-gray-300 p-4 rounded text-xl">9</button>
+          <button class="bg-orange-400 text-white p-4 rounded text-xl">/</button>
+          <button class="bg-gray-300 p-4 rounded text-xl">4</button>
+          <button class="bg-gray-300 p-4 rounded text-xl">5</button>
+          <button class="bg-gray-300 p-4 rounded text-xl">6</button>
+          <button class="bg-orange-400 text-white p-4 rounded text-xl">*</button>
+          <button class="bg-gray-300 p-4 rounded text-xl">1</button>
+          <button class="bg-gray-300 p-4 rounded text-xl">2</button>
+          <button class="bg-gray-300 p-4 rounded text-xl">3</button>
+          <button class="bg-orange-400 text-white p-4 rounded text-xl">-</button>
+          <button class="bg-gray-300 p-4 rounded text-xl col-span-2">0</button>
+          <button class="bg-gray-300 p-4 rounded text-xl">.</button>
+          <button class="bg-orange-400 text-white p-4 rounded text-xl">+</button>
+          <button class="bg-green-500 text-white p-4 rounded text-xl col-span-4">=</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <!-- Pie de página -->
+<footer class="bg-white mt-8 py-4 border-t">
+  <div class="container mx-auto text-center text-gray-700">
+    <p>&copy; 2025 Guía de Tkinter — <strong>Prof. Enrique González (Profesorado de Informática)</strong></p>
+  </div>
+</footer>
+
+</body>
+</html>

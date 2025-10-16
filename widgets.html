@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Widgets Fundamentales - Tkinter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/menu.js"></script>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+  <!-- Encabezado y Navegación -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0">
+        <h1 class="text-2xl font-bold text-gray-800">Guía de Tkinter</h1>
+      </div>
+      <nav class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-4">
+          <a href="index.html" class="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+          <a href="widgets.html" class="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Widgets</a>
+          <a href="layout.html" class="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Gestores de Geometría</a>
+          <a href="dialogos.html" class="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Diálogos</a>
+          <a href="calculadora.html" class="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calculadora</a>
+        </div>
+      </nav>
+
+      <!-- Botón Menú Móvil -->
+      <div class="md:hidden">
+        <div class="relative group" tabindex="0">
+          <button id="menuBtn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Menú móvil -->
+    <div id="mobileMenu" class="hidden md:hidden mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+      <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu">
+        <a href="index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inicio</a>
+        <a href="widgets.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Widgets</a>
+        <a href="layout.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gestores de Geometría</a>
+        <a href="dialogos.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Diálogos</a>
+        <a href="calculadora.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Calculadora</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+<h2 class="text-3xl font-bold text-gray-900 mb-4 border-b pb-2">Widgets Fundamentales</h2>
+<article id="ventana" class="bg-white p-6 rounded-lg shadow-lg mb-6">
+  <h3 class="text-2xl font-semibold text-blue-700 mb-3">Ventana Gráfica (Tk)</h3>
+  <p class="mb-4">El primer paso para cualquier aplicación de Tkinter es crear la ventana principal. Esto se hace instanciando la clase <code>Tk()</code>. El método <code>mainloop()</code> mantiene la ventana abierta y a la espera de eventos.</p>
+  <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto"><code class="language-python">
+# Importamos la librería
+from tkinter import *
+
+# Creamos la ventana principal (raíz)
+root = Tk()
+
+# Asignamos un título a la ventana
+root.title("Mi Primera Ventana")
+
+# Iniciamos el bucle principal de la aplicación
+root.mainloop()
+  </code></pre>
+</article>
+<article id="frame" class="bg-white p-6 rounded-lg shadow-lg mb-6">
+  <h3 class="text-2xl font-semibold text-blue-700 mb-3">Frame</h3>
+  <p class="mb-4">Un <code>Frame</code> es un contenedor rectangular invisible que se utiliza para agrupar y organizar otros widgets.</p>
+  <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto"><code class="language-python">
+from tkinter import *
+root = Tk()
+root.title("Ejemplo de Frame")
+
+marco_principal = Frame(root)
+marco_principal.pack()
+
+marco_principal.config(width="400", height="300")
+marco_principal.config(bg="lightblue")
+
+root.mainloop()
+  </code></pre>
+</article>
+<article id="label" class="bg-white p-6 rounded-lg shadow-lg mb-6">
+  <h3 class="text-2xl font-semibold text-blue-700 mb-3">Label</h3>
+  <p class="mb-4">El widget <code>Label</code> se utiliza para mostrar texto o imágenes estáticas.</p>
+  <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto"><code class="language-python">
+from tkinter import *
+root = Tk()
+root.title("Ejemplo de Label")
+
+etiqueta = Label(root, text="¡Hola, mundo Tkinter!")
+etiqueta.pack(pady=20, padx=20)
+
+root.mainloop()
+  </code></pre>
+</article>
+<article id="button" class="bg-white p-6 rounded-lg shadow-lg mb-6">
+  <h3 class="text-2xl font-semibold text-blue-700 mb-3">Button</h3>
+  <p class="mb-4"><code>Button</code> ejecuta una acción vía el parámetro <code>command</code>.</p>
+  <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto"><code class="language-python">
+from tkinter import *
+
+root = Tk()
+root.title("Ejemplo de Botón")
+
+def accion_boton():
+    print("¡El botón fue presionado!")
+    etiqueta.config(text="¡Botón presionado!")
+
+boton = Button(root, text="Presióname", command=accion_boton)
+boton.pack(pady=10)
+
+etiqueta = Label(root, text="Esperando acción...")
+etiqueta.pack(pady=10)
+
+root.mainloop()
+  </code></pre>
+</article>
+<article id="entry" class="bg-white p-6 rounded-lg shadow-lg mb-6">
+  <h3 class="text-2xl font-semibold text-blue-700 mb-3">Entry</h3>
+  <p class="mb-4">Campo de texto de una sola línea. Para contraseña: <code>show="*"</code>.</p>
+  <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto"><code class="language-python">
+from tkinter import *
+root = Tk()
+root.title("Ejemplo de Entry")
+
+entrada_nombre = Entry(root, width=30)
+entrada_nombre.pack(pady=5, padx=10)
+entrada_nombre.insert(0, "Escribe tu nombre aquí...")
+
+entrada_pass = Entry(root, width=30, show="*")
+entrada_pass.pack(pady=5, padx=10)
+
+def saludar():
+    nombre = entrada_nombre.get()
+    resultado.config(text=f"Hola, {nombre}")
+
+Button(root, text="Saludar", command=saludar).pack(pady=10)
+resultado = Label(root, text="")
+resultado.pack()
+
+root.mainloop()
+  </code></pre>
+</article>
+<article id="radiobutton" class="bg-white p-6 rounded-lg shadow-lg mb-6">
+  <h3 class="text-2xl font-semibold text-blue-700 mb-3">Radiobutton</h3>
+  <p class="mb-4">Seleccionar una única opción de un conjunto mediante una variable de control.</p>
+  <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto"><code class="language-python">
+from tkinter import *
+root = Tk()
+root.title("Ejemplo de Radiobutton")
+
+opcion = IntVar()
+opcion.set(1)
+
+def mostrar_opcion():
+    resultado.config(text=f"Opción seleccionada: {opcion.get()}")
+
+Label(root, text="Elige una opción:").pack(anchor=W)
+Radiobutton(root, text="Opción 1", variable=opcion, value=1).pack(anchor=W)
+Radiobutton(root, text="Opción 2", variable=opcion, value=2).pack(anchor=W)
+Radiobutton(root, text="Opción 3", variable=opcion, value=3).pack(anchor=W)
+
+Button(root, text="Confirmar", command=mostrar_opcion).pack(pady=10)
+resultado = Label(root, text="")
+resultado.pack()
+
+root.mainloop()
+  </code></pre>
+</article>
+<article id="checkbutton" class="bg-white p-6 rounded-lg shadow-lg mb-6">
+  <h3 class="text-2xl font-semibold text-blue-700 mb-3">Checkbutton</h3>
+  <p class="mb-4">Casillas de verificación con su propia variable de control.</p>
+  <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto"><code class="language-python">
+from tkinter import *
+root = Tk()
+root.title("Ejemplo de Checkbutton")
+
+acepta = BooleanVar()
+
+def verificar():
+    if acepta.get():
+        resultado.config(text="Términos aceptados.")
+    else:
+        resultado.config(text="Debes aceptar los términos.")
+
+check = Checkbutton(root, text="Acepto los términos y condiciones", variable=acepta)
+check.pack(pady=10)
+
+Button(root, text="Verificar", command=verificar).pack()
+resultado = Label(root, text="")
+resultado.pack()
+
+root.mainloop()
+  </code></pre>
+</article>
+<article id="labelframe" class="bg-white p-6 rounded-lg shadow-lg mb-6">
+  <h3 class="text-2xl font-semibold text-blue-700 mb-3">LabelFrame</h3>
+  <p class="mb-4">Similar a <code>Frame</code> pero con borde y título.</p>
+  <pre class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto"><code class="language-python">
+from tkinter import *
+root = Tk()
+root.title("Ejemplo de LabelFrame")
+
+login_frame = LabelFrame(root, text="Inicio de Sesión", padx=10, pady=10)
+login_frame.pack(pady=20, padx=20)
+
+Label(login_frame, text="Usuario:").grid(row=0, column=0, sticky="w", pady=2)
+Entry(login_frame).grid(row=0, column=1, pady=2)
+Label(login_frame, text="Contraseña:").grid(row=1, column=0, sticky="w", pady=2)
+Entry(login_frame, show="*").grid(row=1, column=1, pady=2)
+Button(login_frame, text="Entrar").grid(row=2, column=0, columnspan=2, pady=10)
+
+root.mainloop()
+  </code></pre>
+</article>
+
+  </main>
+  <!-- Pie de página -->
+<footer class="bg-white mt-8 py-4 border-t">
+  <div class="container mx-auto text-center text-gray-700">
+    <p>&copy; 2025 Guía de Tkinter — <strong>Prof. Enrique González (Profesorado de Informática)</strong></p>
+  </div>
+</footer>
+
+</body>
+</html>
